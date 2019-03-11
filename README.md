@@ -1,2 +1,2 @@
-# fsm-lang
-Finite State Machine Language
+# FSM
+Finite State Machine
