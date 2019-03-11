@@ -6,25 +6,9 @@ enum class Field {
     DOOR,
 }
 
-enum class Action {
-    FORWARD,
-    RIGHT,
-    LEFT,
-}
-
-enum class Direction {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT,
-}
-
-data class Agent(val position: Position, val direction: Direction)
-
 interface Maze {
     val width: Int
     val height: Int
 
-    fun doAction(action: Action)
-    fun nextField(): Field
+    operator fun get(x: Int, y: Int): Field
 }
