@@ -6,6 +6,8 @@ enum class Field {
     DOOR,
 }
 
+data class Position(val x: Int, val y: Int)
+
 interface Maze {
     val width: Int
     val height: Int

@@ -1,6 +1,5 @@
 package maze
 
-data class Position(val x: Int, val y: Int)
 data class FieldPosition(val position: Position, val field: Field)
 
 class RectangularMaze(

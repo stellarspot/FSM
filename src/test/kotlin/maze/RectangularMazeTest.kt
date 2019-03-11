@@ -1,5 +1,8 @@
 package maze
 
+import agent.Agent
+import agent.AgentSpace
+import agent.Direction
 import org.junit.Test
 import kotlin.test.assertEquals
 
