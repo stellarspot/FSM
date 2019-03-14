@@ -1,7 +1,8 @@
 package draw
 
+import agent.Direction
+import agent.AgentSpace
 import maze.Field
-import maze.Maze
 import org.openrndr.application
 import org.openrndr.color.ColorRGBa
 import org.openrndr.draw.Drawer
@@ -9,7 +10,8 @@ import org.openrndr.draw.Drawer
 fun draw(title: String = "FSM Maze Sample",
          width: Int = 800,
          height: Int = 600,
-         maze: Maze) {
+         space: AgentSpace) {
+
     application {
         configure {
             this.title = title
@@ -18,13 +20,16 @@ fun draw(title: String = "FSM Maze Sample",
         }
         program {
             extend {
-                draw(drawer, maze)
+                draw(drawer, space)
             }
         }
     }
 }
 
-private fun draw(drawer: Drawer, maze: Maze) {
+private fun draw(drawer: Drawer, space: AgentSpace) {
+
+    val agent = space.agent
+    val maze = space.maze
 
     drawer.background(ColorRGBa.WHITE)
 
@@ -80,4 +85,30 @@ private fun draw(drawer: Drawer, maze: Maze) {
             }
         }
     }
+
+    drawer.stroke = ColorRGBa.BLUE
+
+    val x = getX(agent.position.x) + r
+    val y = getX(agent.position.x) + r
+    val yy = getX(agent.position.y + 1)
+
+    val direction = agent.direction
+
+    val rr = 0.8 * r
+    val d = 5.0
+
+    drawer.circle(x, y, rr)
+
+    val dx = when (direction) {
+        Direction.RIGHT -> rr
+        Direction.LEFT -> -rr
+        else -> 0.0
+    }
+    val dy = when (direction) {
+        Direction.UP -> -rr
+        Direction.DOWN -> rr
+        else -> 0.0
+    }
+    drawer.lineSegment(x, y, x + dx, y + dy)
+    drawer.circle(x + dx, y + dy, d)
 }

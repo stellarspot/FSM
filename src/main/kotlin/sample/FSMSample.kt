@@ -1,5 +1,8 @@
 package sample
 
+import agent.Agent
+import agent.AgentSpace
+import agent.Direction
 import draw.draw
 import maze.Field
 import maze.FieldPosition
@@ -14,7 +17,8 @@ fun main(args: Array<String>) {
             FieldPosition(Position(0, 0), Field.DOOR),
             FieldPosition(Position(4, 0), Field.WALL)))
 
-    println("maze:\n$maze")
+    val agent = Agent(Position(2, 2), Direction.UP)
+    val space = AgentSpace(agent, maze)
 
-    draw("Maze", 800, 600, maze)
+    draw("Maze", 800, 600, space)
 }
