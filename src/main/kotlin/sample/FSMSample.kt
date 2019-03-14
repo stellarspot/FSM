@@ -1,9 +1,13 @@
 package sample
 
 import agent.Agent
+import agent.AgentAction
 import agent.AgentSpace
 import agent.Direction
 import draw.draw
+import fsm.core.BaseFSM
+import fsm.core.FSM
+import fsm.core.StateTransition
 import maze.Field
 import maze.FieldPosition
 import maze.Position
@@ -20,5 +24,19 @@ fun main(args: Array<String>) {
     val agent = Agent(Position(2, 2), Direction.UP)
     val space = AgentSpace(agent, maze)
 
+    val fsm = getFSM()
+
     draw("Maze", 800, 600, space)
+}
+
+// Simple FSM
+// Go forward for empty cells and rotate right for walls
+fun getFSM(): FSM<Field, AgentAction> {
+    val fsm = BaseFSM<Field, AgentAction>()
+    val initialState = fsm.initialState
+    initialState.transitions.add(
+            StateTransition(Field.EMPTY, initialState, AgentAction.FORWARD))
+    initialState.transitions.add(
+            StateTransition(Field.WALL, initialState, AgentAction.RIGHT))
+    return fsm
 }

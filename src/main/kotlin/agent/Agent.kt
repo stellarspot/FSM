@@ -1,10 +1,11 @@
 package agent
 
+import fsm.core.Action
 import maze.Maze
 import maze.Field
 import maze.Position
 
-enum class Action {
+enum class AgentAction : Action {
     FORWARD,
     RIGHT,
     LEFT,
@@ -37,21 +38,21 @@ class AgentSpace(var agent: Agent, val maze: Maze) {
 
     val traces = mutableListOf<Agent>()
 
-    fun doAction(action: Action) = {
+    fun doAction(action: AgentAction) = {
 
         traces.add(agent)
 
 
         when (action) {
-            Action.FORWARD -> {
+            AgentAction.FORWARD -> {
                 val nextPosition = nextPosition()
                 val nextField = getField(nextPosition)
                 if (nextField != Field.WALL) {
                     agent = Agent(nextPosition, agent.direction)
                 }
             }
-            Action.LEFT -> agent = Agent(agent.position, agent.direction.rotateLeft())
-            Action.RIGHT -> agent = Agent(agent.position, agent.direction.rotateRight())
+            AgentAction.LEFT -> agent = Agent(agent.position, agent.direction.rotateLeft())
+            AgentAction.RIGHT -> agent = Agent(agent.position, agent.direction.rotateRight())
         }
     }
 

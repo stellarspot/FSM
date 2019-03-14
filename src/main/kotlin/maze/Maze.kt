@@ -1,6 +1,8 @@
 package maze
 
-enum class Field {
+import fsm.core.Input
+
+enum class Field : Input {
     EMPTY,
     WALL,
     DOOR,
