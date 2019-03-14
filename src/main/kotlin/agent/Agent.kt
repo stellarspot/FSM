@@ -1,9 +1,11 @@
 package agent
 
 import fsm.core.Action
+import fsm.core.FSM
 import maze.Maze
 import maze.Field
 import maze.Position
+import java.lang.RuntimeException
 
 enum class AgentAction : Action {
     FORWARD,
@@ -34,14 +36,33 @@ enum class Direction {
 
 data class Agent(val position: Position, val direction: Direction)
 
-class AgentSpace(var agent: Agent, val maze: Maze) {
+class AgentSpace(var agent: Agent, val maze: Maze, val fsm: FSM<Field, AgentAction>) {
 
     val traces = mutableListOf<Agent>()
 
-    fun doAction(action: AgentAction) = {
+    var state = fsm.initialState
+
+    fun moveAgent() {
+
+        println("move agent")
+        val input = nextField()
+
+        for (transition in state.transitions) {
+            if (transition.input == input) {
+                val action = transition.action
+                doAction(action)
+                state = transition.nextState
+                return
+            }
+        }
+
+        throw RuntimeException("State: ${state.name} does not have transition" +
+                " for input: $input")
+    }
+
+    fun doAction(action: AgentAction) {
 
         traces.add(agent)
-
 
         when (action) {
             AgentAction.FORWARD -> {

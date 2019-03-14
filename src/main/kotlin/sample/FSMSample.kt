@@ -21,10 +21,12 @@ fun main(args: Array<String>) {
             FieldPosition(Position(0, 0), Field.DOOR),
             FieldPosition(Position(4, 0), Field.WALL)))
 
-    val agent = Agent(Position(2, 2), Direction.UP)
-    val space = AgentSpace(agent, maze)
-
     val fsm = getFSM()
+    val agent = Agent(Position(2, 2), Direction.UP)
+    val space = AgentSpace(agent, maze, fsm)
+    space.moveAgent()
+    space.moveAgent()
+    space.moveAgent()
 
     draw("Maze", 800, 600, space)
 }

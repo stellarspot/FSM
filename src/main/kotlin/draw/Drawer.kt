@@ -89,8 +89,7 @@ private fun draw(drawer: Drawer, space: AgentSpace) {
     drawer.stroke = ColorRGBa.BLUE
 
     val x = getX(agent.position.x) + r
-    val y = getX(agent.position.x) + r
-    val yy = getX(agent.position.y + 1)
+    val y = getY(agent.position.y) + r
 
     val direction = agent.direction
 

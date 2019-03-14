@@ -10,7 +10,9 @@ data class StateTransition<I : Input, A : Action>(
 
 data class State<I : Input, A : Action>(
         val name: String,
-        val transitions: MutableList<StateTransition<I, A>> = mutableListOf())
+        val transitions: MutableList<StateTransition<I, A>> = mutableListOf()) {
+    override fun toString() = name
+}
 
 interface FSM<I : Input, A : Action> {
 
