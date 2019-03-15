@@ -2,7 +2,7 @@ package maze
 
 import space.Input
 
-enum class Field : Input {
+enum class MazeField : Input {
     EMPTY,
     WALL,
     DOOR,
@@ -14,5 +14,5 @@ interface Maze {
     val width: Int
     val height: Int
 
-    operator fun get(x: Int, y: Int): Field
+    operator fun get(x: Int, y: Int): MazeField
 }

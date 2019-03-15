@@ -1,8 +1,5 @@
 package maze
 
-import agent.Agent
-import agent.AgentSpace
-import agent.Direction
 import org.junit.Test
 import kotlin.test.assertEquals
 
@@ -14,35 +11,35 @@ class RectangularMazeTest {
     @Test
     fun testNextFieldUp() {
 
-        assertEquals(Field.EMPTY,
-                AgentSpace(
+        assertEquals(MazeField.EMPTY,
+                MazeSpace(
                         Agent(Position(1, 1), Direction.UP),
                         RectangularMaze(width, height,
-                                listOf(FieldPosition(Position(1, 2), Field.EMPTY))
+                                listOf(FieldPosition(Position(1, 2), MazeField.EMPTY))
                         )
                 ).nextField()
         )
 
-        assertEquals(Field.WALL,
-                AgentSpace(
+        assertEquals(MazeField.WALL,
+                MazeSpace(
                         Agent(Position(1, 1), Direction.UP),
                         RectangularMaze(width, height,
-                                listOf(FieldPosition(Position(1, 2), Field.WALL))
+                                listOf(FieldPosition(Position(1, 2), MazeField.WALL))
                         )
                 ).nextField()
         )
 
-        assertEquals(Field.DOOR,
-                AgentSpace(
+        assertEquals(MazeField.DOOR,
+                MazeSpace(
                         Agent(Position(1, 1), Direction.UP),
                         RectangularMaze(width, height,
-                                listOf(FieldPosition(Position(1, 2), Field.DOOR))
+                                listOf(FieldPosition(Position(1, 2), MazeField.DOOR))
                         )
                 ).nextField()
         )
 
-        assertEquals(Field.WALL,
-                AgentSpace(
+        assertEquals(MazeField.WALL,
+                MazeSpace(
                         Agent(Position(1, 2), Direction.UP),
                         RectangularMaze(width, height)
                 ).nextField()
@@ -51,35 +48,35 @@ class RectangularMazeTest {
 
     @Test
     fun testNextFieldDown() {
-        assertEquals(Field.EMPTY,
-                AgentSpace(
+        assertEquals(MazeField.EMPTY,
+                MazeSpace(
                         Agent(Position(1, 1), Direction.DOWN),
                         RectangularMaze(width, height,
-                                listOf(FieldPosition(Position(1, 0), Field.EMPTY))
+                                listOf(FieldPosition(Position(1, 0), MazeField.EMPTY))
                         )
                 ).nextField()
         )
 
-        assertEquals(Field.WALL,
-                AgentSpace(
+        assertEquals(MazeField.WALL,
+                MazeSpace(
                         Agent(Position(1, 1), Direction.DOWN),
                         RectangularMaze(width, height,
-                                listOf(FieldPosition(Position(1, 0), Field.WALL))
+                                listOf(FieldPosition(Position(1, 0), MazeField.WALL))
                         )
                 ).nextField()
         )
 
-        assertEquals(Field.DOOR,
-                AgentSpace(
+        assertEquals(MazeField.DOOR,
+                MazeSpace(
                         Agent(Position(1, 1), Direction.DOWN),
                         RectangularMaze(width, height,
-                                listOf(FieldPosition(Position(1, 0), Field.DOOR))
+                                listOf(FieldPosition(Position(1, 0), MazeField.DOOR))
                         )
                 ).nextField()
         )
 
-        assertEquals(Field.WALL,
-                AgentSpace(
+        assertEquals(MazeField.WALL,
+                MazeSpace(
                         Agent(Position(1, 0), Direction.DOWN),
                         RectangularMaze(width, height)
                 ).nextField()
@@ -88,35 +85,35 @@ class RectangularMazeTest {
 
     @Test
     fun testNextFieldRight() {
-        assertEquals(Field.EMPTY,
-                AgentSpace(
+        assertEquals(MazeField.EMPTY,
+                MazeSpace(
                         Agent(Position(1, 1), Direction.RIGHT),
                         RectangularMaze(width, height,
-                                listOf(FieldPosition(Position(2, 1), Field.EMPTY))
+                                listOf(FieldPosition(Position(2, 1), MazeField.EMPTY))
                         )
                 ).nextField()
         )
 
-        assertEquals(Field.WALL,
-                AgentSpace(
+        assertEquals(MazeField.WALL,
+                MazeSpace(
                         Agent(Position(1, 1), Direction.RIGHT),
                         RectangularMaze(width, height,
-                                listOf(FieldPosition(Position(2, 1), Field.WALL))
+                                listOf(FieldPosition(Position(2, 1), MazeField.WALL))
                         )
                 ).nextField()
         )
 
-        assertEquals(Field.DOOR,
-                AgentSpace(
+        assertEquals(MazeField.DOOR,
+                MazeSpace(
                         Agent(Position(1, 1), Direction.RIGHT),
                         RectangularMaze(width, height,
-                                listOf(FieldPosition(Position(2, 1), Field.DOOR))
+                                listOf(FieldPosition(Position(2, 1), MazeField.DOOR))
                         )
                 ).nextField()
         )
 
-        assertEquals(Field.WALL,
-                AgentSpace(
+        assertEquals(MazeField.WALL,
+                MazeSpace(
                         Agent(Position(2, 1), Direction.RIGHT),
                         RectangularMaze(width, height)
                 ).nextField()
@@ -125,35 +122,35 @@ class RectangularMazeTest {
 
     @Test
     fun testNextFieldLeft() {
-        assertEquals(Field.EMPTY,
-                AgentSpace(
+        assertEquals(MazeField.EMPTY,
+                MazeSpace(
                         Agent(Position(1, 1), Direction.LEFT),
                         RectangularMaze(width, height,
-                                listOf(FieldPosition(Position(0, 1), Field.EMPTY))
+                                listOf(FieldPosition(Position(0, 1), MazeField.EMPTY))
                         )
                 ).nextField()
         )
 
-        assertEquals(Field.WALL,
-                AgentSpace(
+        assertEquals(MazeField.WALL,
+                MazeSpace(
                         Agent(Position(1, 1), Direction.LEFT),
                         RectangularMaze(width, height,
-                                listOf(FieldPosition(Position(0, 1), Field.WALL))
+                                listOf(FieldPosition(Position(0, 1), MazeField.WALL))
                         )
                 ).nextField()
         )
 
-        assertEquals(Field.DOOR,
-                AgentSpace(
+        assertEquals(MazeField.DOOR,
+                MazeSpace(
                         Agent(Position(1, 1), Direction.LEFT),
                         RectangularMaze(width, height,
-                                listOf(FieldPosition(Position(0, 1), Field.DOOR))
+                                listOf(FieldPosition(Position(0, 1), MazeField.DOOR))
                         )
                 ).nextField()
         )
 
-        assertEquals(Field.WALL,
-                AgentSpace(
+        assertEquals(MazeField.WALL,
+                MazeSpace(
                         Agent(Position(0, 1), Direction.LEFT),
                         RectangularMaze(width, height)
                 ).nextField()

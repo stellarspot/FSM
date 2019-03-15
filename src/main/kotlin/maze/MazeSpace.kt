@@ -1,13 +1,11 @@
-package agent
+package maze
 
 import space.Action
 import fsm.core.FiniteStateMachine
-import maze.Maze
-import maze.Field
-import maze.Position
+import fsm.core.BaseFiniteStateMachine
 import java.lang.RuntimeException
 
-enum class AgentAction : Action {
+enum class MazeAction : Action {
     FORWARD,
     RIGHT,
     LEFT,
@@ -36,7 +34,9 @@ enum class Direction {
 
 data class Agent(val position: Position, val direction: Direction)
 
-class AgentSpace(var agent: Agent, val maze: Maze, val fsm: FiniteStateMachine<Field, AgentAction>) {
+class MazeSpace(var agent: Agent,
+                val maze: Maze,
+                val fsm: FiniteStateMachine<MazeField, MazeAction> = BaseFiniteStateMachine()) {
 
     val traces = mutableListOf<Agent>()
 
@@ -60,20 +60,20 @@ class AgentSpace(var agent: Agent, val maze: Maze, val fsm: FiniteStateMachine<F
                 " for input: $input")
     }
 
-    fun doAction(action: AgentAction) {
+    fun doAction(action: MazeAction) {
 
         traces.add(agent)
 
         when (action) {
-            AgentAction.FORWARD -> {
+            MazeAction.FORWARD -> {
                 val nextPosition = nextPosition()
                 val nextField = getField(nextPosition)
-                if (nextField != Field.WALL) {
+                if (nextField != MazeField.WALL) {
                     agent = Agent(nextPosition, agent.direction)
                 }
             }
-            AgentAction.LEFT -> agent = Agent(agent.position, agent.direction.rotateLeft())
-            AgentAction.RIGHT -> agent = Agent(agent.position, agent.direction.rotateRight())
+            MazeAction.LEFT -> agent = Agent(agent.position, agent.direction.rotateLeft())
+            MazeAction.RIGHT -> agent = Agent(agent.position, agent.direction.rotateRight())
         }
     }
 
@@ -90,9 +90,9 @@ class AgentSpace(var agent: Agent, val maze: Maze, val fsm: FiniteStateMachine<F
             }
     )
 
-    private fun getField(position: Position): Field = maze[position.x, position.y]
+    private fun getField(position: Position): MazeField = maze[position.x, position.y]
 
-    fun nextField(): Field = getField(nextPosition())
+    fun nextField(): MazeField = getField(nextPosition())
 
     override fun toString() = buildString {
         for (j in (0 until maze.height).reversed()) {
@@ -101,9 +101,9 @@ class AgentSpace(var agent: Agent, val maze: Maze, val fsm: FiniteStateMachine<F
                     append("R")
                 } else {
                     when (maze[i, j]) {
-                        Field.EMPTY -> append('_')
-                        Field.WALL -> append('W')
-                        Field.DOOR -> append('D')
+                        MazeField.EMPTY -> append('_')
+                        MazeField.WALL -> append('W')
+                        MazeField.DOOR -> append('D')
                     }
                 }
             }

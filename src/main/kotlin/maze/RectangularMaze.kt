@@ -1,13 +1,13 @@
 package maze
 
-data class FieldPosition(val position: Position, val field: Field)
+data class FieldPosition(val position: Position, val field: MazeField)
 
 class RectangularMaze(
         override val width: Int,
         override val height: Int,
         val positions: List<FieldPosition> = listOf()) : Maze {
 
-    private val fields = Array(width) { Array(height) { Field.EMPTY } }
+    private val fields = Array(width) { Array(height) { MazeField.EMPTY } }
 
     init {
         for (f in positions) {
@@ -15,9 +15,9 @@ class RectangularMaze(
         }
     }
 
-    override fun get(x: Int, y: Int): Field {
+    override fun get(x: Int, y: Int): MazeField {
         if (x < 0 || y < 0 || x >= width || y >= height) {
-            return Field.WALL
+            return MazeField.WALL
         }
         return fields[x][y]
     }
@@ -26,9 +26,9 @@ class RectangularMaze(
         for (j in (0 until height).reversed()) {
             for (i in 0 until width) {
                 when (fields[i][j]) {
-                    Field.EMPTY -> append('_')
-                    Field.WALL -> append('W')
-                    Field.DOOR -> append('D')
+                    MazeField.EMPTY -> append('_')
+                    MazeField.WALL -> append('W')
+                    MazeField.DOOR -> append('D')
                 }
             }
             append('\n')

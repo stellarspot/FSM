@@ -1,8 +1,8 @@
 package draw
 
-import agent.Direction
-import agent.AgentSpace
-import maze.Field
+import maze.MazeSpace
+import maze.MazeField
+import maze.Direction
 import org.openrndr.application
 import org.openrndr.color.ColorRGBa
 import org.openrndr.draw.Drawer
@@ -10,7 +10,7 @@ import org.openrndr.draw.Drawer
 fun draw(title: String = "FiniteStateMachine Maze Sample",
          width: Int = 800,
          height: Int = 600,
-         space: AgentSpace) {
+         space: MazeSpace) {
 
     application {
         configure {
@@ -26,7 +26,7 @@ fun draw(title: String = "FiniteStateMachine Maze Sample",
     }
 }
 
-private fun draw(drawer: Drawer, space: AgentSpace) {
+private fun draw(drawer: Drawer, space: MazeSpace) {
 
     val agent = space.agent
     val maze = space.maze
@@ -75,11 +75,11 @@ private fun draw(drawer: Drawer, space: AgentSpace) {
 
             val field = maze[i, j]
             when (field) {
-                Field.WALL -> {
+                MazeField.WALL -> {
                     drawer.lineSegment(x, y, x + stepSize, y + stepSize)
                     drawer.lineSegment(x, y + stepSize, x + stepSize, y)
                 }
-                Field.DOOR -> {
+                MazeField.DOOR -> {
                     drawer.circle(x + r, y + r, r)
                 }
             }
