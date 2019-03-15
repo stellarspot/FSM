@@ -1,7 +1,7 @@
 package space
 
-import fsm.core.State
-import fsm.core.FiniteStateMachine
+import fsm.State
+import fsm.FiniteStateMachine
 
 interface Action
 interface Input

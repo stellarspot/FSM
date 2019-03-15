@@ -6,9 +6,9 @@ import maze.MazeAction
 import maze.MazeSpace
 import draw.draw
 import space.SpaceRunner
-import fsm.core.BaseFiniteStateMachine
-import fsm.core.FiniteStateMachine
-import fsm.core.StateTransition
+import fsm.BaseFiniteStateMachine
+import fsm.FiniteStateMachine
+import fsm.StateTransition
 import maze.MazeField
 import maze.FieldPosition
 import maze.Position

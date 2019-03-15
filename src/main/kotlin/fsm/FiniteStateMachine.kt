@@ -1,4 +1,4 @@
-package fsm.core
+package fsm
 
 import space.Action
 import space.Input
