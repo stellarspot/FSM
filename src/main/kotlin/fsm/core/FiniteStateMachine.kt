@@ -1,7 +1,7 @@
 package fsm.core
 
-interface Action
-interface Input
+import space.Action
+import space.Input
 
 data class StateTransition<I : Input, A : Action>(
         val input: I,

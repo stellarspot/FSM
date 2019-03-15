@@ -1,6 +1,6 @@
 package agent
 
-import fsm.core.Action
+import space.Action
 import fsm.core.FiniteStateMachine
 import maze.Maze
 import maze.Field
