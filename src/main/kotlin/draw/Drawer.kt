@@ -7,7 +7,7 @@ import org.openrndr.application
 import org.openrndr.color.ColorRGBa
 import org.openrndr.draw.Drawer
 
-fun draw(title: String = "FSM Maze Sample",
+fun draw(title: String = "FiniteStateMachine Maze Sample",
          width: Int = 800,
          height: Int = 600,
          space: AgentSpace) {

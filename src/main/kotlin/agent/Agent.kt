@@ -1,7 +1,7 @@
 package agent
 
 import fsm.core.Action
-import fsm.core.FSM
+import fsm.core.FiniteStateMachine
 import maze.Maze
 import maze.Field
 import maze.Position
@@ -36,7 +36,7 @@ enum class Direction {
 
 data class Agent(val position: Position, val direction: Direction)
 
-class AgentSpace(var agent: Agent, val maze: Maze, val fsm: FSM<Field, AgentAction>) {
+class AgentSpace(var agent: Agent, val maze: Maze, val fsm: FiniteStateMachine<Field, AgentAction>) {
 
     val traces = mutableListOf<Agent>()
 

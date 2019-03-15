@@ -5,8 +5,8 @@ import agent.AgentAction
 import agent.AgentSpace
 import agent.Direction
 import draw.draw
-import fsm.core.BaseFSM
-import fsm.core.FSM
+import fsm.core.BaseFiniteStateMachine
+import fsm.core.FiniteStateMachine
 import fsm.core.StateTransition
 import maze.Field
 import maze.FieldPosition
@@ -15,7 +15,7 @@ import maze.RectangularMaze
 
 
 fun main(args: Array<String>) {
-    println("FSM Sample")
+    println("FiniteStateMachine Sample")
 
     val maze = RectangularMaze(5, 5, listOf(
             FieldPosition(Position(0, 0), Field.DOOR),
@@ -31,10 +31,10 @@ fun main(args: Array<String>) {
     draw("Maze", 800, 600, space)
 }
 
-// Simple FSM
+// Simple FiniteStateMachine
 // Go forward for empty cells and rotate right for walls
-fun getFSM(): FSM<Field, AgentAction> {
-    val fsm = BaseFSM<Field, AgentAction>()
+fun getFSM(): FiniteStateMachine<Field, AgentAction> {
+    val fsm = BaseFiniteStateMachine<Field, AgentAction>()
     val initialState = fsm.initialState
     initialState.transitions.add(
             StateTransition(Field.EMPTY, initialState, AgentAction.FORWARD))

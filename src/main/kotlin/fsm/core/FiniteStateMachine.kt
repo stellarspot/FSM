@@ -14,13 +14,13 @@ data class State<I : Input, A : Action>(
     override fun toString() = name
 }
 
-interface FSM<I : Input, A : Action> {
+interface FiniteStateMachine<I : Input, A : Action> {
 
     val initialState: State<I, A>
     val states: MutableList<State<I, A>>
 }
 
-class BaseFSM<I : Input, A : Action> : FSM<I, A> {
+class BaseFiniteStateMachine<I : Input, A : Action> : FiniteStateMachine<I, A> {
     override val initialState = State<I, A>("Initial")
     override val states = mutableListOf<State<I, A>>()
 }
