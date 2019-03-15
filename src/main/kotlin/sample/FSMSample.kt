@@ -1,18 +1,14 @@
 package sample
 
-import maze.Agent
-import maze.Direction
-import maze.MazeAction
-import maze.MazeSpace
 import draw.draw
-import space.SpaceRunner
 import fsm.BaseFiniteStateMachine
 import fsm.FiniteStateMachine
 import fsm.StateTransition
-import maze.MazeField
-import maze.FieldPosition
-import maze.Position
-import maze.RectangularMaze
+import maze.*
+import space.SpaceRunner
+import space.SpaceRunnerTrace
+import space.TraceItem
+import space.reverse
 
 
 fun main(args: Array<String>) {
@@ -31,6 +27,9 @@ fun main(args: Array<String>) {
     spaceRunner.step()
     spaceRunner.step()
     spaceRunner.step()
+    spaceRunner.step()
+
+    dumpTrace(spaceRunner.trace)
 
     draw("Maze", 800, 600, space)
 }
@@ -45,4 +44,19 @@ fun getFSM(): FiniteStateMachine<MazeField, MazeAction> {
     initialState.transitions.add(
             StateTransition(MazeField.WALL, initialState, MazeAction.RIGHT))
     return fsm
+}
+
+fun dumpTrace(trace: TraceItem<SpaceRunnerTrace<MazeField, MazeAction, MazeTrace>>?) {
+
+    var step = 0
+    var t = trace.reverse()
+
+    while (t != null) {
+        println("--- step: ${++step} ---")
+        val fsmTrace = t.trace.fsmTrace
+        val spaceTrace = t.trace.spaceTrace
+        println("space: $spaceTrace")
+        println("fsm  : $fsmTrace")
+        t = t.next
+    }
 }

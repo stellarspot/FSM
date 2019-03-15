@@ -2,6 +2,7 @@ package maze
 
 import space.Action
 import space.Space
+import space.Trace
 
 enum class MazeAction : Action {
     FORWARD,
@@ -32,10 +33,10 @@ enum class Direction {
 
 data class Agent(val position: Position, val direction: Direction)
 
-class MazeSpace(var agent: Agent,
-                val maze: Maze) : Space<MazeField, MazeAction> {
+data class MazeTrace(val agent: Agent) : Trace
 
-    val traces = mutableListOf<Agent>()
+class MazeSpace(var agent: Agent,
+                val maze: Maze) : Space<MazeField, MazeAction, MazeTrace> {
 
     private fun getField(position: Position): MazeField = maze[position.x, position.y]
 
@@ -46,8 +47,6 @@ class MazeSpace(var agent: Agent,
     override fun failed() = false
 
     override fun doAction(action: MazeAction) {
-
-        traces.add(agent)
 
         when (action) {
             MazeAction.FORWARD -> {
@@ -61,6 +60,8 @@ class MazeSpace(var agent: Agent,
             MazeAction.RIGHT -> agent = Agent(agent.position, agent.direction.rotateRight())
         }
     }
+
+    override fun getTrace(): MazeTrace = MazeTrace(agent)
 
     private fun nextPosition(): Position = Position(
             agent.position.x + when (agent.direction) {
