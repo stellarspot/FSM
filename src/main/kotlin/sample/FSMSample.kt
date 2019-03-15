@@ -5,6 +5,7 @@ import maze.Direction
 import maze.MazeAction
 import maze.MazeSpace
 import draw.draw
+import space.SpaceRunner
 import fsm.core.BaseFiniteStateMachine
 import fsm.core.FiniteStateMachine
 import fsm.core.StateTransition
@@ -23,10 +24,13 @@ fun main(args: Array<String>) {
 
     val fsm = getFSM()
     val agent = Agent(Position(2, 2), Direction.UP)
-    val space = MazeSpace(agent, maze, fsm)
-    space.moveAgent()
-    space.moveAgent()
-    space.moveAgent()
+    val space = MazeSpace(agent, maze)
+    val spaceRunner = SpaceRunner(fsm, space) { state, input ->
+        println("Missed transition state: ${state.name}, input: $input")
+    }
+    spaceRunner.step()
+    spaceRunner.step()
+    spaceRunner.step()
 
     draw("Maze", 800, 600, space)
 }

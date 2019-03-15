@@ -1,9 +1,7 @@
 package maze
 
 import space.Action
-import fsm.core.FiniteStateMachine
-import fsm.core.BaseFiniteStateMachine
-import java.lang.RuntimeException
+import space.Space
 
 enum class MazeAction : Action {
     FORWARD,
@@ -35,32 +33,19 @@ enum class Direction {
 data class Agent(val position: Position, val direction: Direction)
 
 class MazeSpace(var agent: Agent,
-                val maze: Maze,
-                val fsm: FiniteStateMachine<MazeField, MazeAction> = BaseFiniteStateMachine()) {
+                val maze: Maze) : Space<MazeField, MazeAction> {
 
     val traces = mutableListOf<Agent>()
 
-    var state = fsm.initialState
+    private fun getField(position: Position): MazeField = maze[position.x, position.y]
 
-    fun moveAgent() {
+    override fun getInput() = getField(nextPosition())
 
-        println("move agent")
-        val input = nextField()
+    override fun passed() = false
 
-        for (transition in state.transitions) {
-            if (transition.input == input) {
-                val action = transition.action
-                doAction(action)
-                state = transition.nextState
-                return
-            }
-        }
+    override fun failed() = false
 
-        throw RuntimeException("State: ${state.name} does not have transition" +
-                " for input: $input")
-    }
-
-    fun doAction(action: MazeAction) {
+    override fun doAction(action: MazeAction) {
 
         traces.add(agent)
 
@@ -89,10 +74,6 @@ class MazeSpace(var agent: Agent,
                 else -> 0
             }
     )
-
-    private fun getField(position: Position): MazeField = maze[position.x, position.y]
-
-    fun nextField(): MazeField = getField(nextPosition())
 
     override fun toString() = buildString {
         for (j in (0 until maze.height).reversed()) {
